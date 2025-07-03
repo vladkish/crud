@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация | Поэтический блог</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="index.html">Стихи и Душа</a>
+                </div>
+                <nav class="nav">
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="#">О авторе</a></li>
+                        <li><a href="#">Коллекции</a></li>
+                        <li><a href="profile.html">Профиль</a></li>
+                    </ul>
+                </nav>
+                <div class="auth">
+                    <a href="login.html" class="btn btn-login">Войти</a>
+                    <a href="sign.html" class="btn btn-signup active">Регистрация</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main auth-page">
+        <div class="container">
+            <div class="auth-form-container">
+                <h1>Создать аккаунт</h1>
+                <form class="auth-form">
+                    <div class="form-group">
+                        <label for="signup-name">Имя</label>
+                        <input type="text" id="signup-name" placeholder="Ваше имя" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" placeholder="Ваш email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Пароль</label>
+                        <input type="password" id="signup-password" placeholder="Придумайте пароль" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-confirm">Подтверждение пароля</label>
+                        <input type="password" id="signup-confirm" placeholder="Повторите пароль" required>
+                    </div>
+                    <div class="form-options">
+                        <label class="agree-terms">
+                            <input type="checkbox" required> Я согласен с <a href="#">условиями использования</a>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-signup-submit">Зарегистрироваться</button>
+                    <div class="auth-alt">
+                        <span>Или зарегистрироваться с помощью</span>
+                        <div class="social-login">
+                            <a href="#" class="btn-social facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="btn-social google"><i class="fab fa-google"></i></a>
+                            <a href="#" class="btn-social twitter"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <div class="auth-switch">
+                        Уже есть аккаунт? <a href="login.html">Войдите</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-logo">
+                    <a href="index.html">Стихи и Душа</a>
+                </div>
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="#">О нас</a></li>
+                        <li><a href="#">Контакты</a></li>
+                        <li><a href="#">Правила</a></li>
+                        <li><a href="#">Политика конфиденциальности</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Поэтический блог. Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
