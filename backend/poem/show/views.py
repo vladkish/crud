@@ -1,3 +1,7 @@
 from django.shortcuts import render
 
-# Create your views here.
+def index(request):
+    return render(request, 'show/index.html')
+
+def poem(request):
+    return render(request, 'show/poem.html')
