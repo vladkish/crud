@@ -6,24 +6,18 @@
         <div class="container">
             <article class="poem-full">
                 <div class="poem-meta">
-                    <span class="date">15 мая 2023</span>
-                    <span class="category">Любовная лирика</span>
+                    <span class="date">{{ poem.date_public }}</span>
+                    <span class="category">{{ poem.category }}</span>
                 </div>
-                <h1 class="poem-title">Бессонница</h1>
+                <h1 class="poem-title">{{ poem.title }}</h1>
                 <div class="poem-author">
-                    <img src="https://via.placeholder.com/50" alt="Автор" class="author-avatar">
-                    <span class="author-name">Александр Блок</span>
+                    <img src="{% static "img/author.jpg" %}" alt="Автор" class="author-avatar">
+                    <span class="author-name">Rita D.</span>
                 </div>
                 <div class="poem-content">
-                    <p>Ночь. Улица. Фонарь. Аптека.<br>
-                    Бессмысленный и тусклый свет.<br>
-                    Живи еще хоть четверть века —<br>
-                    Все будет так. Исхода нет.</p>
+                    <p>{{ poem.text }}<br>
                     
-                    <p>Умрешь — начнешь опять сначала<br>
-                    И повторится все, как встарь:<br>
-                    Ночь, ледяная рябь канала,<br>
-                    Аптека, улица, фонарь.</p>
+                    </p>
                 </div>
                 <div class="poem-actions">
                     <div class="btn-like">

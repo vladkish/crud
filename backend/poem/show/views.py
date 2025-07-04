@@ -10,5 +10,10 @@ def index(request, category_id=None):
     
     return render(request, 'show/index.html', context)
 
-def poem(request):
-    return render(request, 'show/poem.html')
+def poem(request, poem_id):
+    
+    context = {
+        'poem' : Poem.objects.get(id=poem_id)
+    }
+    
+    return render(request, 'show/poem.html', context)
