@@ -7,76 +7,37 @@
             <section class="categories">
                 <h2>Категории</h2>
                 <div class="category-list">
-                    <a href="#" class="category">Любовная лирика</a>
-                    <a href="#" class="category">Философская</a>
-                    <a href="#" class="category">Природа</a>
-                    <a href="#" class="category">Городская</a>
-                    <a href="#" class="category">Свободные стихи</a>
+                    {% for category in categoryies %}
+                        <a href="#" class="category">{{ category.title }}</a>
+                    {% endfor %}
                 </div>
             </section>
 
             <section class="poems">
                 <h2>Последние стихи</h2>
                 <div class="poem-grid">
-                    <article class="poem-card">
-                        <div class="poem-meta">
-                            <span class="date">15 мая 2023</span>
-                            <span class="category">Любовная лирика</span>
-                        </div>
-                        <h3 class="poem-title"><a href="poem.html">Бессонница</a></h3>
-                        <div class="poem-excerpt">
-                            <p>Ночь. Улица. Фонарь. Аптека.<br>
-                            Бессмысленный и тусклый свет.<br>
-                            Живи еще хоть четверть века —<br>
-                            Все будет так. Исхода нет.</p>
-                        </div>
-                        <div class="poem-footer">
-                            <a href="{% url "show:poem" %}" class="read-more">Читать далее</a>
-                            <div class="likes">
-                                <i class="far fa-heart"></i> 24
+                    {% for poems in last_poem %}
+                        <article class="poem-card">
+                            <div class="poem-meta">
+                                <span class="date">{{ poems.date_public }}</span>
+                                <span class="category">{{ poems.category }}</span>
                             </div>
-                        </div>
-                    </article>
-
-                    <article class="poem-card">
-                        <div class="poem-meta">
-                            <span class="date">10 апреля 2023</span>
-                            <span class="category">Философская</span>
-                        </div>
-                        <h3 class="poem-title"><a href="poem.html">О доблестях, о подвигах, о славе...</a></h3>
-                        <div class="poem-excerpt">
-                            <p>О доблестях, о подвигах, о славе<br>
-                            Я забывал на горестной земле,<br>
-                            Когда твое лицо в простой оправе<br>
-                            Передо мной сияло на столе.</p>
-                        </div>
-                        <div class="poem-footer">
-                            <a href="{% url "show:poem" %}" class="read-more">Читать далее</a>
-                            <div class="likes">
-                                <i class="far fa-heart"></i> 42
+                            <h3 class="poem-title"><a href="poem.html">{{ poems.title }}</a></h3>
+                            <div class="poem-excerpt">
+                                <p>{{ poems.text }}<br>
+                                {% comment %} Бессмысленный и тусклый свет.<br>
+                                Живи еще хоть четверть века —<br>
+                                Все будет так. Исхода нет.{% endcomment %}
+                                </p>
                             </div>
-                        </div>
-                    </article>
-
-                    <article class="poem-card">
-                        <div class="poem-meta">
-                            <span class="date">3 марта 2023</span>
-                            <span class="category">Природа</span>
-                        </div>
-                        <h3 class="poem-title"><a href="poem.html">Осень</a></h3>
-                        <div class="poem-excerpt">
-                            <p>Осень. Древний уголок<br>
-                            Старых книг, одежд, оружья,<br>
-                            Где сокровищ каталог<br>
-                            Перелистывает стужа.</p>
-                        </div>
-                        <div class="poem-footer">
-                            <a href="{% url "show:poem" %}" class="read-more">Читать далее</a>
-                            <div class="likes">
-                                <i class="far fa-heart"></i> 18
+                            <div class="poem-footer">
+                                <a href="{% url "show:poem" %}" class="read-more">Читать далее</a>
+                                <div class="likes">
+                                    <i class="far fa-heart"></i> 24
+                                </div>
                             </div>
-                        </div>
-                    </article>
+                        </article>
+                    {% endfor %}
                 </div>
             </section>
         </div>
