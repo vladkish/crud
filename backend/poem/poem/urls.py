@@ -8,6 +8,7 @@ urlpatterns = [
     
     # index
     path('', views.index, name='index'),
+    path('category/<int:category_id>/', views.index, name='category'),
     
     # show app
     path('show/', include('show.urls', namespace="show")),

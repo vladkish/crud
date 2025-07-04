@@ -7,8 +7,9 @@
             <section class="categories">
                 <h2>Категории</h2>
                 <div class="category-list">
+                    <a href="{% url "index" %}" class="category">Все</a>
                     {% for category in categoryies %}
-                        <a href="#" class="category">{{ category.title }}</a>
+                        <a href="{% url "category" category.id %}" class="category">{{ category.title }}</a>
                     {% endfor %}
                 </div>
             </section>

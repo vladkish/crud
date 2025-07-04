@@ -24,4 +24,3 @@ class Poem(models.Model):
             return f"{self.text[0:total_str + 1]}..."
         else:
             return self.text
-                    
