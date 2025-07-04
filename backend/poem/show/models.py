@@ -14,3 +14,14 @@ class Poem(models.Model):
     
     def __str__(self):
         return f'{self.title}, {self.text} == {self.category}'
+    
+    # Функция вывода правильного текста
+    def text_poem(self):
+        dot = self.text.count('.')
+        if dot > 1:
+            total = self.text.find('.')
+            total_str = self.text.find('.', total + 1)
+            return f"{self.text[0:total_str + 1]}..."
+        else:
+            return self.text
+                    
