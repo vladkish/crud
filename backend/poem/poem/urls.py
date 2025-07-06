@@ -12,4 +12,7 @@ urlpatterns = [
     
     # show app
     path('show/', include('show.urls', namespace="show")),
+    
+    # users app
+    path('users/', include('users.urls', namespace="users"))
 ]

@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Поэтический блог | Главная</title>
+    <title>Вход | Поэтический блог</title>
     <link rel="stylesheet" href="{% static "css/style.css" %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -25,7 +25,7 @@
                     </ul>
                 </nav>
                 <div class="auth">
-                    <a href="{% url "users:login" %}" class="btn btn-login">Войти</a>
+                    <a href="{% url "users:login" %}" class="btn btn-login active">Войти</a>
                     <a href="{% url "users:sign" %}" class="btn btn-signup">Регистрация</a>
                 </div>
             </div>
@@ -61,5 +61,6 @@
             </div>
         </div>
     </footer>
+
 </body>
 </html>

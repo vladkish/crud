@@ -1,34 +1,6 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой профиль | Поэтический блог</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
-    <header class="header">
-        <div class="container">
-            <div class="header-inner">
-                <div class="logo">
-                    <a href="index.html">Стихи и Душа</a>
-                </div>
-                <nav class="nav">
-                    <ul>
-                        <li><a href="index.html">Главная</a></li>
-                        <li><a href="#">О авторе</a></li>
-                        <li><a href="#">Коллекции</a></li>
-                        <li><a href="profile.html" class="active">Профиль</a></li>
-                    </ul>
-                </nav>
-                <div class="auth">
-                    <a href="#" class="btn btn-logout">Выйти</a>
-                </div>
-            </div>
-        </div>
-    </header>
+{% extends "users/base.html" %}
 
+{% block main %}
     <main class="main profile-page">
         <div class="container">
             <section class="profile-header">
@@ -110,32 +82,4 @@
             </section>
         </div>
     </main>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-inner">
-                <div class="footer-logo">
-                    <a href="index.html">Стихи и Душа</a>
-                </div>
-                <div class="footer-links">
-                    <ul>
-                        <li><a href="#">О нас</a></li>
-                        <li><a href="#">Контакты</a></li>
-                        <li><a href="#">Правила</a></li>
-                        <li><a href="#">Политика конфиденциальности</a></li>
-                    </ul>
-                </div>
-                <div class="footer-social">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-            <div class="copyright">
-                &copy; 2023 Поэтический блог. Все права защищены.
-            </div>
-        </div>
-    </footer>
-
-</body>
-</html>
+{% endblock main %}
