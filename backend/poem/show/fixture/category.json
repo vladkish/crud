@@ -1,0 +1,1 @@
+[{"model": "show.category", "pk": 1, "fields": {"title": "Любовная лирика"}}, {"model": "show.category", "pk": 2, "fields": {"title": "Философская"}}, {"model": "show.category", "pk": 3, "fields": {"title": "Природа"}}, {"model": "show.category", "pk": 4, "fields": {"title": "Городская"}}, {"model": "show.category", "pk": 6, "fields": {"title": "Свободные стихи"}}]
