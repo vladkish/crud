@@ -1,10 +1,46 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .forms import LoginForm, SignForm
+from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 
 def login(request):
-    return render(request, 'users/login.html')
+    
+    if request.method == "POST":
+        form = LoginForm(data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = auth.authenticate(request, username=username, password=password)
+            
+            if user:
+                auth.login(request, user)
+                return redirect(request, 'index')
+    else:
+        form = LoginForm()    
+        
+    context = {
+        'form' : form
+    }           
+    
+    return render(request, 'users/login.html', context)
 
 def sign(request):
-    return render(request, 'users/sign.html')
+    
+    if request.method == "POST":
+        form = SignForm(data=request.POST)
+        if form.is_valid():
+            user = form.save()
+            auth.login(request, user)
+            return redirect(request, 'index')        
+    else:
+        form = SignForm(request, 'index')
+        
+    context = {
+        'form' : form
+    }
+    
+    return render(request, 'users/sign.html', context)
 
+@login_required
 def profile(request):
     return render(request, 'users/profile.html')
