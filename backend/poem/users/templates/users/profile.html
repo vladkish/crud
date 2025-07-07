@@ -30,22 +30,19 @@
 
             <section class="profile-edit">
                 <h2>Редактировать профиль</h2>
-                <form class="edit-form">
+                <form class="edit-form" action="{% url "users:profile" %}" method="POST">
+                    {% csrf_token %}
                     <div class="form-group">
-                        <label for="name">Имя</label>
-                        <input type="text" id="name" value="Иван Иванов">
+                        <label for="{{ form.username }}">Имя</label>
+                        {{ form.username }}
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" value="ivan@example.com">
+                        <label for="{{ form.email }}">Email</label>
+                        {{ form.email }}
                     </div>
                     <div class="form-group">
-                        <label for="bio">О себе</label>
-                        <textarea id="bio">Любитель поэзии, особенно классической русской лирики.</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Новый пароль</label>
-                        <input type="password" id="password" placeholder="Оставьте пустым, если не хотите менять">
+                        <label for="{{ form.about_me }}">О себе</label>
+                        {{ form.about_me }}
                     </div>
                     <button type="submit" class="btn btn-save">Сохранить изменения</button>
                 </form>
