@@ -45,7 +45,11 @@ class SignForm(UserCreationForm):
         
         
 # Custom profile form
-# class ProfileForm(UserChangeForm):
-#     class Meta:
-#         model = User
-#         fields = ('')
+class ProfileForm(UserChangeForm):
+    username = forms.CharField(widget=forms.TextInput())
+    email = forms.EmailField(widget=forms.EmailInput())
+    about_me = forms.CharField(widget=forms.TextInput())
+    
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'about_me')
