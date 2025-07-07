@@ -34,6 +34,8 @@ def sign(request):
             return redirect('index')
         else:
             print(form.errors)
+    else:
+        form = SignForm()
         
     context = {
         'form' : form
@@ -60,19 +62,3 @@ def profile(request):
     }
     
     return render(request, 'users/profile.html', context)
-
-# @login_required
-# def profile_image(request):
-#     if request.method == "POST":
-#         form = ProfileImage(request.POST, request.FILES, instance=request.user)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('index')
-#     else:
-#         form = ProfileImage(instance=request.user)
-
-#     context = {
-#         'image_form': form
-#     }
-
-#     return render(request, 'users/profile.html', context)
