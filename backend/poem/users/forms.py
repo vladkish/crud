@@ -47,10 +47,13 @@ class SignForm(UserCreationForm):
 # Custom profile form
 class ProfileForm(UserChangeForm):
     username = forms.CharField(widget=forms.TextInput())
+    
     email = forms.EmailField(widget=forms.EmailInput(attrs={
         'readonly' : True
     }))
+    
     about_me = forms.CharField(widget=forms.TextInput())
+    image = forms.ImageField(widget=forms.FileInput())
     
     class Meta:
         model = User

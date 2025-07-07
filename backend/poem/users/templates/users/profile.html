@@ -1,12 +1,21 @@
 {% extends "users/base.html" %}
+{% load static %}
 
 {% block main %}
     <main class="main profile-page">
         <div class="container">
             <section class="profile-header">
                 <div class="profile-avatar">
-                    <img src="https://via.placeholder.com/150" alt="Аватар пользователя">
-                    <button class="btn-change-avatar">Изменить фото</button>
+                    <img 
+                    src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'img/author.jpg' %}{% endif %}" 
+                    alt="Аватар пользователя">
+
+                    <form action="{% url "users:profile" %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <label class="btn-change-avatar" for="{{ form.image.id_for_label }}">Изменить фото</label>
+                        <div class="block_change">{{ form.image }}</div>
+                        <button type="submit" class="btn btn-save">Сохранить фото</button>
+                    </form>
                 </div>
                 <div class="profile-info">
                     <h1>Иван Иванов</h1>
@@ -33,15 +42,15 @@
                 <form class="edit-form" action="{% url "users:profile" %}" method="POST">
                     {% csrf_token %}
                     <div class="form-group">
-                        <label for="{{ form.username }}">Имя</label>
+                        <label for="{{ form.username.id_for_label }}">Имя</label>
                         {{ form.username }}
                     </div>
                     <div class="form-group">
-                        <label for="{{ form.email }}">Email</label>
+                        <label for="{{ form.email.id_for_label }}">Email</label>
                         {{ form.email }}
                     </div>
                     <div class="form-group">
-                        <label for="{{ form.about_me }}">О себе</label>
+                        <label for="{{ form.about_me.id_for_label }}">О себе</label>
                         {{ form.about_me }}
                     </div>
                     <button type="submit" class="btn btn-save">Сохранить изменения</button>
