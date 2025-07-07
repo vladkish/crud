@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import LoginForm, SignForm
+from .forms import LoginForm, SignForm, ProfileForm
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 
@@ -43,4 +43,17 @@ def sign(request):
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    
+    if request.method == "POST":
+        form = ProfileForm(data=request.POST, instance=request.user, files=request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = ProfileForm(instance=request.user)
+        
+    context = {
+        'form' : form
+    }
+    
+    return render(request, 'users/profile.html', context)
