@@ -14,7 +14,7 @@ def login(request):
             
             if user:
                 auth.login(request, user)
-                return redirect(request, 'index')
+                return redirect('index')
     else:
         form = LoginForm()    
         
@@ -31,9 +31,9 @@ def sign(request):
         if form.is_valid():
             user = form.save()
             auth.login(request, user)
-            return redirect(request, 'index')        
-    else:
-        form = SignForm(request, 'index')
+            return redirect('index')
+        else:
+            print(form.errors)
         
     context = {
         'form' : form
