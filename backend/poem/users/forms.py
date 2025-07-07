@@ -42,3 +42,10 @@ class SignForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
+        
+        
+# Custom profile form
+# class ProfileForm(UserChangeForm):
+#     class Meta:
+#         model = User
+#         fields = ('')
