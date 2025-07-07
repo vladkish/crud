@@ -45,10 +45,13 @@ def sign(request):
 def profile(request):
     
     if request.method == "POST":
-        form = ProfileForm(data=request.POST, instance=request.user, files=request.FILES)
+        form = ProfileForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
+            print(request.FILES)  # Проверьте, получаете ли вы файл
             form.save()
             return redirect('index')
+        else:
+            print(form.errors)  # Выведет ошибки валидации
     else:
         form = ProfileForm(instance=request.user)
         
@@ -57,3 +60,19 @@ def profile(request):
     }
     
     return render(request, 'users/profile.html', context)
+
+# @login_required
+# def profile_image(request):
+#     if request.method == "POST":
+#         form = ProfileImage(request.POST, request.FILES, instance=request.user)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('index')
+#     else:
+#         form = ProfileImage(instance=request.user)
+
+#     context = {
+#         'image_form': form
+#     }
+
+#     return render(request, 'users/profile.html', context)

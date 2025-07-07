@@ -10,12 +10,14 @@
                     src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'img/author.jpg' %}{% endif %}" 
                     alt="Аватар пользователя">
 
-                    <form action="{% url "users:profile" %}" method="POST" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <label class="btn-change-avatar" for="{{ form.image.id_for_label }}">Изменить фото</label>
-                        <div class="block_change">{{ form.image }}</div>
-                        <button type="submit" class="btn btn-save">Сохранить фото</button>
-                    </form>
+                <form action="{% url 'users:profile' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="username" value="{{ user.username }}">
+                    <input type="hidden" name="email" value="{{ user.email }}">
+                    <input type="hidden" name="about_me" value="{{ user.about_me }}">
+                    <div class="block_change">{{ form.image }}</div>
+                    <button type="submit" class="btn btn-save">Сохранить фото</button>
+                </form>
                 </div>
                 <div class="profile-info">
                     <h1>Иван Иванов</h1>

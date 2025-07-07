@@ -6,5 +6,6 @@ app_name = 'users'
 urlpatterns = [
     path('login/', views.login, name="login"),
     path('sign/', views.sign, name="sign"),
-    path('profile/', views.profile, name="profile")
+    path('profile/', views.profile, name="profile"),
+    # path('profile/', views.profile_image, name="profile_image")
 ]
