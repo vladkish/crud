@@ -32,7 +32,8 @@ def poem(request, poem_id):
     
     context = {
         'poem' : Poem.objects.get(id=poem_id),
-        'form' : form
+        'form' : form,
+        'comments' : Comment.objects.filter(poem_id=poem_id),
     }
     
     return render(request, 'show/poem.html', context)

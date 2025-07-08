@@ -87,3 +87,6 @@ class Comment(models.Model):
     poem = models.ForeignKey(to=Poem, related_name='comment', on_delete=models.CASCADE)
     date_public = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
+    
+    def __str__(self):
+        return f'{self.user} for poem'

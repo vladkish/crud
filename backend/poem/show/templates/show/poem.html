@@ -36,43 +36,26 @@
             </article>
 
             <section class="comments">
-                <h2>Комментарии (3)</h2>
+                <h2>Комментарии ({{ comments.count }})</h2>
                 <form class="comment-form" method="POST" action="{% url "show:poem" poem.id %}">
                     {% csrf_token %}
                     {{ form.text }}
                     <button type="submit" class="btn btn-submit">Отправить</button>
                 </form>
                 <div class="comment-list">
-                    <div class="comment">
-                        <div class="comment-author">
-                            <img src="https://via.placeholder.com/40" alt="Пользователь" class="comment-avatar">
-                            <span class="comment-name">Мария Иванова</span>
-                            <span class="comment-date">2 дня назад</span>
+                    {% for comment in comments %}
+                        <div class="comment">
+                            <div class="comment-author">
+                                {% comment %} time {% endcomment %}
+                                <img src="{% if comment.user.image %} {{ comment.user.image.url }} {% else %} {% static "img/author.jpg" %} {% endif %}" alt="Пользователь" class="comment-avatar">
+                                <span class="comment-name">{{ comment.user.username }}</span>
+                                <span class="comment-date">{{ comment.poem.date_count }}</span>
+                            </div>
+                            <div class="comment-text">
+                                {{ comment.text }}
+                            </div>
                         </div>
-                        <div class="comment-text">
-                            Очень глубокий стих, заставляет задуматься о вечном. Спасибо автору за такие проникновенные строки!
-                        </div>
-                    </div>
-                    <div class="comment">
-                        <div class="comment-author">
-                            <img src="https://via.placeholder.com/40" alt="Пользователь" class="comment-avatar">
-                            <span class="comment-name">Сергей Петров</span>
-                            <span class="comment-date">5 дней назад</span>
-                        </div>
-                        <div class="comment-text">
-                            Читал это стихотворение в школе, но только сейчас, спустя годы, начинаю понимать его настоящий смысл.
-                        </div>
-                    </div>
-                    <div class="comment">
-                        <div class="comment-author">
-                            <img src="https://via.placeholder.com/40" alt="Пользователь" class="comment-avatar">
-                            <span class="comment-name">Анна Сидорова</span>
-                            <span class="comment-date">1 неделю назад</span>
-                        </div>
-                        <div class="comment-text">
-                            Каждая строчка наполнена таким смыслом... Это именно то стихотворение, которое хочется перечитывать снова и снова.
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </section>
         </div>
