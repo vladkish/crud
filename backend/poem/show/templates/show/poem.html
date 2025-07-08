@@ -37,8 +37,9 @@
 
             <section class="comments">
                 <h2>Комментарии (3)</h2>
-                <form class="comment-form">
-                    <textarea placeholder="Напишите ваш комментарий..." required></textarea>
+                <form class="comment-form" method="POS">
+                    {% csrf_token %}
+                    {{ form.text }}
                     <button type="submit" class="btn btn-submit">Отправить</button>
                 </form>
                 <div class="comment-list">

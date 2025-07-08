@@ -49,11 +49,8 @@ def profile(request):
     if request.method == "POST":
         form = ProfileForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
-            print(request.FILES)  # Проверьте, получаете ли вы файл
             form.save()
             return redirect('index')
-        else:
-            print(form.errors)  # Выведет ошибки валидации
     else:
         form = ProfileForm(instance=request.user)
         

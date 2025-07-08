@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Category, Poem
+from .models import Category, Poem, Comment
 from django.contrib.auth.decorators import login_required
 
 def index(request, category_id=None):
@@ -14,8 +14,19 @@ def index(request, category_id=None):
 
 def poem(request, poem_id):
     
+    if request.method == 'POST':
+        form = Comment(data=request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = request.user
+            comment.poem = Poem.objects.get(id=poem_id)
+            comment.save
+    else:
+        form = Comment()
+    
     context = {
         'poem' : Poem.objects.get(id=poem_id),
+        'form' : form
     }
     
     return render(request, 'show/poem.html', context)
