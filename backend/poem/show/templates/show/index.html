@@ -30,9 +30,15 @@
                             </div>
                             <div class="poem-footer">
                                 <a href="{% url "show:poem" poems.id %}" class="read-more">Читать далее</a>
-                                <div class="likes">
-                                    <i class="far fa-heart"></i> 24
-                                </div>
+                                {% if user in poems.like.all %}
+                                    <a class="red" href="{% url "show:like" poems.id %}">
+                                        <i class="far fa-heart"></i> {{ poems.like.count }}
+                                    </a>
+                                {% else %}
+                                    <a class="likes" href="{% url "show:like" poems.id %}">
+                                        <i class="far fa-heart"></i> {{ poems.like.count }}
+                                    </a>
+                                {% endif %}
                             </div>
                         </article>
                     {% endfor %}

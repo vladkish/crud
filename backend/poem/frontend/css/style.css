@@ -243,6 +243,10 @@ h3 {
     color: #666;
 }
 
+.red {
+    color: red !important;
+}
+
 /* Poem Page */
 .poem-page {
     max-width: 800px;

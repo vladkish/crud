@@ -1,4 +1,5 @@
 from django.db import models
+from users.models import User
 
 class Category(models.Model):
     title = models.CharField(max_length=60)
@@ -11,6 +12,7 @@ class Poem(models.Model):
     text = models.TextField()
     category = models.ForeignKey(to=Category, on_delete=models.CASCADE, related_name='poems')
     date_public = models.DateTimeField(auto_now_add=True)
+    like = models.ManyToManyField(to=User, related_name="poems", blank=True)
     
     def __str__(self):
         return f'{self.title}, {self.text} == {self.category}'
