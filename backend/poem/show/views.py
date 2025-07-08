@@ -5,6 +5,8 @@ from .forms import CommentForm
 
 def index(request, category_id=None):
     
+    Poem.objects.get(id=1).date_count()
+    
     context = {
         'categoryies' : Category.objects.all(),
         'last_poem' : Poem.objects.filter(category_id=category_id) if category_id else Poem.objects.all().order_by('-id')[:3],
