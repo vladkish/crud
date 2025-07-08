@@ -37,7 +37,7 @@
 
             <section class="comments">
                 <h2>Комментарии (3)</h2>
-                <form class="comment-form" method="POS">
+                <form class="comment-form" method="POST" action="{% url "show:poem" poem.id %}">
                     {% csrf_token %}
                     {{ form.text }}
                     <button type="submit" class="btn btn-submit">Отправить</button>

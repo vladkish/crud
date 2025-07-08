@@ -1,12 +1,12 @@
 from django import forms
-from .models import Poem
+from .models import Comment
 
-class Comment(forms.ModelForm):
+class CommentForm(forms.ModelForm):
     
     text = forms.CharField(widget=forms.TextInput(attrs={
         'placeholder' : 'Введите сообщение'
     }))
     
     class Meta:
-        model = Poem
-        fields = ('text', 'user', 'poem')
+        model = Comment
+        fields = ('text', )
