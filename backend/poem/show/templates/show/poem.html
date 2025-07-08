@@ -49,7 +49,7 @@
                                 {% comment %} time {% endcomment %}
                                 <img src="{% if comment.user.image %} {{ comment.user.image.url }} {% else %} {% static "img/author.jpg" %} {% endif %}" alt="Пользователь" class="comment-avatar">
                                 <span class="comment-name">{{ comment.user.username }}</span>
-                                <span class="comment-date">{{ comment.poem.date_count }}</span>
+                                <span class="comment-date">{{ comment.date_count }}</span>
                             </div>
                             <div class="comment-text">
                                 {{ comment.text }}

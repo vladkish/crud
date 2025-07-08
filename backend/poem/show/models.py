@@ -90,3 +90,63 @@ class Comment(models.Model):
     
     def __str__(self):
         return f'{self.user} for poem'
+    
+    def text_poem(self):
+        dot = self.text.count('.')
+        if dot > 1:
+            total = self.text.find('.')
+            total_str = self.text.find('.', total + 1)
+            return f"{self.text[0:total_str + 1]}..."
+        else:
+            return self.text
+
+    def plural_day(n):
+        if 11 <= n % 100 <= 14:
+            return 'дней'
+        if n % 10 == 1:
+            return 'день'
+        elif 2 <= n % 10 <= 4:
+            return 'дня'
+        else:
+            return 'дней'
+
+    def plural_month(n):
+        if 11 <= n % 100 <= 14:
+            return 'месяцев'
+        if n % 10 == 1:
+            return 'месяц'
+        elif 2 <= n % 10 <= 4:
+            return 'месяца'
+        else:
+            return 'месяцев'
+
+    def plural_year(n):
+        if 11 <= n % 100 <= 14:
+            return 'лет'
+        if n % 10 == 1:
+            return 'год'
+        elif 2 <= n % 10 <= 4:
+            return 'года'
+        else:
+            return 'лет'
+
+    def date_count(self):
+        now_date = self.date_public.date()
+        today = datetime.today().date()
+
+        delta = (today - now_date).days
+
+        if delta == 0:
+            return 'Сегодня'
+        elif delta == 1:
+            return 'Вчера'
+        elif delta == 7:
+            return 'Неделю назад'
+        elif delta < 31:
+            return f'{delta} дней назад'
+        elif delta < 365:
+            months = delta // 30
+            return f'{months} месяц(ев) назад'
+        else:
+            years = delta // 365
+            return f'{years} год(а/лет) назад'
