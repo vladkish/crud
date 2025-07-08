@@ -26,3 +26,9 @@ class Poem(models.Model):
             return f"{self.text[0:total_str + 1]}..."
         else:
             return self.text
+        
+class Comment(models.Model):
+    user = models.ForeignKey(to=User, related_name='comment', on_delete=models.CASCADE)
+    poem = models.ForeignKey(to=Poem, related_name='comment', on_delete=models.CASCADE)
+    date_public = models.DateTimeField(auto_now_add=True)
+    text = models.TextField()
