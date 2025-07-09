@@ -57,18 +57,12 @@ class BadWords(models.Model):
 
 # Manager model Comment
 class ManagerComment(models.QuerySet):
-    
-    total = ''
-    
-    # Checking author comment.
-    def ckecking(self):
-        for user in self:
-            total += self.user
+    def checking(self):
+        self.total = ""
+        for comment in self:
+            self.total += str(comment.user)
+        return len(self.total) == len(self)
             
-        if len(total) == len(self):
-            return True
-        return False
-        
         
 class Comment(models.Model):
     user = models.ForeignKey(to=User, related_name='comment', on_delete=models.CASCADE)
@@ -77,7 +71,7 @@ class Comment(models.Model):
     text = models.CharField(max_length=250)
     
     # Connect.
-    objects = ManagerComment()
+    objects = ManagerComment.as_manager()
     
     def __str__(self):
         return f'{self.user} for poem'
