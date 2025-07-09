@@ -7,7 +7,7 @@
             <section class="profile-header">
                 <div class="profile-avatar">
                     <img 
-                    src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'img/author.jpg' %}{% endif %}" 
+                    src="{{ user.image.url }}" 
                     alt="Аватар пользователя">
 
                 <form action="{% url 'users:profile' %}" method="POST" enctype="multipart/form-data">
@@ -21,7 +21,7 @@
                 </div>
                 <div class="profile-info">
                     <h1>{{ user.username }}</h1>
-                    <p class="profile-bio">{{ user.about_me }}</p>
+                    <p class="profile-bio">{% if user.about_me %}{{ user.about_me }}{% else %}О себе{% endif %}</p>
                     <div class="profile-stats">
                         <div class="stat">
                             <span class="stat-number">42</span>
