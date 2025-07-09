@@ -1,6 +1,9 @@
 from django.db import models
 from users.models import User
 
+# Для создание списка в поле модели.
+from django.db.models import JSONField
+
 # from time, for fnc date_count
 from datetime import datetime
 import time
@@ -60,7 +63,7 @@ class Poem(models.Model):
             return 'года'
         else:
             return 'лет'
-
+        
     def date_count(self):
         now_date = self.date_public.date()
         today = datetime.today().date()
@@ -74,10 +77,10 @@ class Poem(models.Model):
         elif delta == 7:
             return 'Неделю назад'
         elif delta < 31:
-            return f'{delta} дней назад'
+            return f'{plural_day(delta)} дней назад'
         elif delta < 365:
             months = delta // 30
-            return f'{months} месяц(ев) назад'
+            return f'{plural_month(months)} месяц(ев) назад'
         else:
             years = delta // 365
             return f'{years} год(а/лет) назад'
@@ -144,13 +147,16 @@ class Comment(models.Model):
         elif delta == 7:
             return 'Неделю назад'
         elif delta < 31:
-            return f'{delta} дней назад'
+            return f'{plural_day(delta)} дней назад'
         elif delta < 365:
             months = delta // 30
-            return f'{months} месяц(ев) назад'
+            return f'{plural_month(months)} месяц(ев) назад'
         else:
             years = delta // 365
             return f'{years} год(а/лет) назад'
+        
+class BadWords(models.Model):
+    bad_words = models.JSONField(default=list)
         
 class SavePoem(models.Model):
     poem = models.ForeignKey(to=Poem, on_delete=models.CASCADE, related_name='save_poems')
@@ -158,3 +164,7 @@ class SavePoem(models.Model):
     
     def __str__(self):
         return f'{self.poem} for {self.user}'
+    
+    # Фильтр на коменты.
+    def filters(self):
+        pass
