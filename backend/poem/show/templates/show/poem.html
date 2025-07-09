@@ -20,6 +20,8 @@
                     </p>
                 </div>
                 <div class="poem-actions">
+
+                    {% comment %} Logic like {% endcomment %}
                     {% if user in poem.like.all %}
                         <a class="red" href="{% url "show:like" poem.id %}">
                             <i class="far fa-heart"></i> {{ poem.like.count }}
@@ -29,9 +31,18 @@
                             <i class="far fa-heart"></i> {{ poem.like.count }}
                         </a>
                     {% endif %}
-                    <a class="btn-bookmark" href="{% url "show:save_poem" poem.id %}">
-                        <i class="far fa-bookmark"></i> В закладки
-                    </a>
+
+                    {% comment %} Logic poem {% endcomment %}
+                    {% if poem.id in saved_poems %}
+                        <a class="btn-bookmark gold" href="{% url "show:save_poem" poem.id %}">
+                            <i class="far fa-bookmark"></i> В закладки
+                        </a>
+                    {% else %}
+                        <a class="btn-bookmark" href="{% url "show:save_poem" poem.id %}">
+                            <i class="far fa-bookmark"></i> В закладки
+                        </a>
+                    {% endif %}
+                    
                     <div class="share">
                         <span>Поделиться:</span>
                         <a href="#"><i class="fab fa-facebook-f"></i></a>

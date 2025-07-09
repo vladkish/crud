@@ -35,6 +35,7 @@ def poem(request, poem_id):
         'poem' : poem,
         'form' : form,
         'comments' : Comment.objects.filter(poem_id=poem_id),
+        'saved_poems' : request.user.save_poems.values_list('poem_id', flat=True)
     }
     
     poem.reads.add(request.user)
@@ -56,9 +57,10 @@ def like(request, poem_id):
 def save_poem(request, poem_id):
     poem = get_object_or_404(Poem, id=poem_id)
     user = request.user
+    poem_obj = SavePoem.objects.filter(poem=poem, user=user)
     
-    if SavePoem.objects.filter(poem=poem, user=user).exists():
-        return redirect(request.META['HTTP_REFERER'])
+    if poem_obj.exists():
+        poem_obj.delete()
     else:
         # Create objects
         SavePoem.objects.create(poem=poem, user=user)
