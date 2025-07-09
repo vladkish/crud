@@ -1,12 +1,12 @@
 from django.db import models
 from users.models import User
 
-# Для создание списка в поле модели.
-from django.db.models import JSONField
-
 # from time, for fnc date_count
 from datetime import datetime
 import time
+
+# Для создание списка в поле модели.
+from django.db.models import JSONField
 
 class Category(models.Model):
     title = models.CharField(max_length=60)
@@ -63,7 +63,7 @@ class Poem(models.Model):
             return 'года'
         else:
             return 'лет'
-        
+
     def date_count(self):
         now_date = self.date_public.date()
         today = datetime.today().date()
@@ -77,20 +77,26 @@ class Poem(models.Model):
         elif delta == 7:
             return 'Неделю назад'
         elif delta < 31:
-            return f'{plural_day(delta)} дней назад'
+            return f'{delta} дней назад'
         elif delta < 365:
             months = delta // 30
-            return f'{plural_month(months)} месяц(ев) назад'
+            return f'{months} месяц(ев) назад'
         else:
             years = delta // 365
             return f'{years} год(а/лет) назад'
 
+# Filter for Comments.
+class BadWords(models.Model):
+    bad_words = models.CharField(max_length=120)
+    
+    def __str__(self):
+        return f'{self.bad_words}'
         
 class Comment(models.Model):
     user = models.ForeignKey(to=User, related_name='comment', on_delete=models.CASCADE)
     poem = models.ForeignKey(to=Poem, related_name='comment', on_delete=models.CASCADE)
     date_public = models.DateTimeField(auto_now_add=True)
-    text = models.TextField()
+    text = models.CharField(max_length=250)
     
     def __str__(self):
         return f'{self.user} for poem'
@@ -147,24 +153,28 @@ class Comment(models.Model):
         elif delta == 7:
             return 'Неделю назад'
         elif delta < 31:
-            return f'{plural_day(delta)} дней назад'
+            return f'{delta} дней назад'
         elif delta < 365:
             months = delta // 30
-            return f'{plural_month(months)} месяц(ев) назад'
+            return f'{months} месяц(ев) назад'
         else:
             years = delta // 365
             return f'{years} год(а/лет) назад'
         
-class BadWords(models.Model):
-    bad_words = models.JSONField(default=list)
+    def filters(self, text):
+
+        banned_words = BadWords.objects.values_list('bad_words', flat=True)
         
+        text_lower = text.lower()
+        
+        for word in banned_words:
+            if word and word.lower() in text_lower:
+                return False
+        return True
+
 class SavePoem(models.Model):
     poem = models.ForeignKey(to=Poem, on_delete=models.CASCADE, related_name='save_poems')
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='save_poems')
     
     def __str__(self):
-        return f'{self.poem} for {self.user}'
-    
-    # Фильтр на коменты.
-    def filters(self):
-        pass
+        return f'{self.poem} for {self.user}'  
