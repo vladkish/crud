@@ -20,19 +20,19 @@
                 </form>
                 </div>
                 <div class="profile-info">
-                    <h1>Иван Иванов</h1>
-                    <p class="profile-bio">Любитель поэзии, особенно классической русской лирики.</p>
+                    <h1>{{ user.username }}</h1>
+                    <p class="profile-bio">{{ user.about_me }}</p>
                     <div class="profile-stats">
                         <div class="stat">
                             <span class="stat-number">42</span>
                             <span class="stat-label">Стихов прочитано</span>
                         </div>
                         <div class="stat">
-                            <span class="stat-number">18</span>
+                            <span class="stat-number">{{ user.comment.count }}</span>
                             <span class="stat-label">Комментариев</span>
                         </div>
                         <div class="stat">
-                            <span class="stat-number">7</span>
+                            <span class="stat-number">{{ user.save_poems.count }}</span>
                             <span class="stat-label">В закладках</span>
                         </div>
                     </div>
@@ -60,32 +60,18 @@
             </section>
 
             <section class="favorite-poems">
-                <h2>Понравившиеся стихи</h2>
+                <h2>Сохраненные стихи</h2>
                 <div class="poem-list">
-                    <div class="poem-item">
-                        <h3><a href="poem.html">Бессонница</a></h3>
-                        <p class="poem-excerpt">Ночь. Улица. Фонарь. Аптека. Бессмысленный и тусклый свет...</p>
-                        <div class="poem-meta">
-                            <span class="author">Александр Блок</span>
-                            <span class="date">15 мая 2023</span>
+                    {% for poem in save_poems %}
+                        <div class="poem-item">
+                            <h3><a href="{% url "show:poem" poem.poem.id %}">{{ poem.poem.title }}</a></h3>
+                            <p class="poem-excerpt">{{ poem.poem.text_poem }}...</p>
+                            <div class="poem-meta">
+                                <span class="author">Rita D.</span>
+                                <span class="date">{{ poem.poem.date_public.date }}</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="poem-item">
-                        <h3><a href="poem.html">О доблестях, о подвигах, о славе...</a></h3>
-                        <p class="poem-excerpt">О доблестях, о подвигах, о славе Я забывал на горестной земле...</p>
-                        <div class="poem-meta">
-                            <span class="author">Александр Блок</span>
-                            <span class="date">10 апреля 2023</span>
-                        </div>
-                    </div>
-                    <div class="poem-item">
-                        <h3><a href="poem.html">Осень</a></h3>
-                        <p class="poem-excerpt">Осень. Древний уголок Старых книг, одежд, оружья...</p>
-                        <div class="poem-meta">
-                            <span class="author">Александр Блок</span>
-                            <span class="date">3 марта 2023</span>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </section>
         </div>

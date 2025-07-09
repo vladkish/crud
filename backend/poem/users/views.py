@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import LoginForm, SignForm, ProfileForm
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from show.models import SavePoem
 
 def login(request):
     
@@ -55,7 +56,8 @@ def profile(request):
         form = ProfileForm(instance=request.user)
         
     context = {
-        'form' : form
+        'form' : form,
+        'save_poems' : SavePoem.objects.filter(user=request.user)
     }
     
     return render(request, 'users/profile.html', context)
