@@ -20,12 +20,18 @@
                     </p>
                 </div>
                 <div class="poem-actions">
-                    <div class="btn-like">
-                        <i class="far fa-heart"></i> <span>24</span>
-                    </div>
-                    <button class="btn-bookmark">
+                    {% if user in poem.like.all %}
+                        <a class="red" href="{% url "show:like" poem.id %}">
+                            <i class="far fa-heart"></i> {{ poem.like.count }}
+                        </a>
+                    {% else %}
+                        <a class="likes" href="{% url "show:like" poem.id %}">
+                            <i class="far fa-heart"></i> {{ poem.like.count }}
+                        </a>
+                    {% endif %}
+                    <a class="btn-bookmark" href="{% url "show:save_poem" poem.id %}">
                         <i class="far fa-bookmark"></i> В закладки
-                    </button>
+                    </a>
                     <div class="share">
                         <span>Поделиться:</span>
                         <a href="#"><i class="fab fa-facebook-f"></i></a>

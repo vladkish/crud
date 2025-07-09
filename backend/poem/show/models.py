@@ -150,3 +150,10 @@ class Comment(models.Model):
         else:
             years = delta // 365
             return f'{years} год(а/лет) назад'
+        
+class SavePoem(models.Model):
+    poem = models.ForeignKey(to=Poem, on_delete=models.CASCADE, related_name='save_poems')
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='save_poems')
+    
+    def __str__(self):
+        return f'{self.poem} for {self.user}'

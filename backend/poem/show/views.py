@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from .models import Category, Poem, Comment
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Category, Poem, Comment, SavePoem
 from django.contrib.auth.decorators import login_required
 from .forms import CommentForm
 
@@ -47,4 +47,16 @@ def like(request, poem_id):
         poem.like.add(request.user)
     else:
         poem.like.remove(request.user)
+    return redirect(request.META['HTTP_REFERER'])
+
+@login_required
+def save_poem(request, poem_id):
+    poem = get_object_or_404(Poem, id=poem_id)
+    user = request.user
+    
+    if SavePoem.objects.filter(poem=poem, user=user).exists():
+        return redirect(request.META['HTTP_REFERER'])
+    else:
+        # Create objects
+        SavePoem.objects.create(poem=poem, user=user)
     return redirect(request.META['HTTP_REFERER'])
