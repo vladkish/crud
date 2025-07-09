@@ -17,6 +17,7 @@ class Poem(models.Model):
     category = models.ForeignKey(to=Category, on_delete=models.CASCADE, related_name='poems')
     date_public = models.DateTimeField(auto_now_add=True)
     like = models.ManyToManyField(to=User, related_name="poems", blank=True)
+    reads = models.ManyToManyField(to=User, related_name="reads")
     
     def __str__(self):
         return f'{self.title}, {self.text} == {self.category}'

@@ -4,9 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import CommentForm
 
 def index(request, category_id=None):
-    
-    Poem.objects.get(id=1).date_count()
-    
+
     context = {
         'categoryies' : Category.objects.all(),
         'last_poem' : Poem.objects.filter(category_id=category_id) if category_id else Poem.objects.all().order_by('-id')[:3],
@@ -16,6 +14,9 @@ def index(request, category_id=None):
     return render(request, 'show/index.html', context)
 
 def poem(request, poem_id):
+    
+    poem = Poem.objects.get(id=poem_id)
+    
     if request.method == 'POST':
         form = CommentForm(data=request.POST)
         if form.is_valid():
@@ -31,10 +32,12 @@ def poem(request, poem_id):
         form = CommentForm()
     
     context = {
-        'poem' : Poem.objects.get(id=poem_id),
+        'poem' : poem,
         'form' : form,
         'comments' : Comment.objects.filter(poem_id=poem_id),
     }
+    
+    poem.reads.add(request.user)
     
     return render(request, 'show/poem.html', context)
 

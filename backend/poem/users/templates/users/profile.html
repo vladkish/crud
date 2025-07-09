@@ -24,7 +24,7 @@
                     <p class="profile-bio">{% if user.about_me %}{{ user.about_me }}{% else %}О себе{% endif %}</p>
                     <div class="profile-stats">
                         <div class="stat">
-                            <span class="stat-number">42</span>
+                            <span class="stat-number">{{ user.reads.all.count }}</span>
                             <span class="stat-label">Стихов прочитано</span>
                         </div>
                         <div class="stat">
