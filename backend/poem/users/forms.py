@@ -43,6 +43,12 @@ class SignForm(UserCreationForm):
         model = User
         fields = ('username', 'email', 'password1', 'password2')
         
+    def email_checking(self, user):
+        for email in User.objects.all().values('email'):
+            if user.email in email['email']:
+                return False
+        return True
+        
         
 # Custom profile form
 class ProfileForm(UserChangeForm):
