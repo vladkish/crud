@@ -29,7 +29,8 @@ def sign(request):
     
     if request.method == "POST":
         form = SignForm(data=request.POST)
-        if form.is_valid():
+        email = request.POST['email']
+        if form.is_valid() and form.email_checking(email):
             user = form.save()
             auth.login(request, user)
             return redirect('index')
