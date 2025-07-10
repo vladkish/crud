@@ -5,3 +5,4 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     image = models.ImageField(upload_to='avatars/', blank=True, null=True, default='avatars/author.jpg')
     about_me = models.TextField(null=True, blank=True)
+    read_poems = models.ManyToManyField(to="show.Poem", related_name="read_poems")

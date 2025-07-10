@@ -76,5 +76,36 @@
                 </div>
             </section>
         </div>
+
+        {% if saved_poems %}
+            <h2>Просмотренные ранее стихи</h2>
+            <div class="poem-grid">
+                {% for poems in saved_poems %}
+                    <article class="poem-card">
+                        <div class="poem-meta">
+                            <span class="date">{{ poems.date_count }}</span>
+                            <span class="category">{{ poems.category }}</span>
+                        </div>
+                        <h3 class="poem-title"><a href="poem.html">{{ poems.title }}</a></h3>
+                        <div class="poem-excerpt">
+                            <p>{{ poems.text_poem }}<br>
+                            </p>
+                        </div>
+                        <div class="poem-footer">
+                            <a href="{% url "show:poem" poems.id %}" class="read-more">Перейти</a>
+                            {% if user in poems.like.all %}
+                                <a class="red" href="{% url "show:like" poems.id %}">
+                                    <i class="far fa-heart"></i> {{ poems.like.count }}
+                                </a>
+                            {% else %}
+                                <a class="likes" href="{% url "show:like" poems.id %}">
+                                    <i class="far fa-heart"></i> {{ poems.like.count }}
+                                </a>
+                            {% endif %}
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        {% endif %}
     </main>
 {% endblock main %}

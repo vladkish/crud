@@ -44,10 +44,11 @@ def poem(request, poem_id):
         'poem': poem,
         'form': form,
         'comments': Comment.objects.filter(poem_id=poem_id),
-        'saved_poems': request.user.save_poems.values_list('poem_id', flat=True),
+        'saved_poems': request.user.read_poems.all()[:3],
     }
     
     poem.reads.add(request.user)
+    request.user.read_poems.add(poem)
     return render(request, 'show/poem.html', context)
 
 # System likes.
