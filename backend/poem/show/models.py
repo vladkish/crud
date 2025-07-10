@@ -57,11 +57,17 @@ class BadWords(models.Model):
 
 # Manager model Comment
 class ManagerComment(models.QuerySet):
-    def checking(self):
-        self.total = ""
-        for comment in self:
-            self.total += str(comment.user)
-        return len(self.total) == len(self)
+    def checking(self, username):
+        self.total = []
+        for word in list(self):
+            
+            # Save username in list.
+            self.total.append(str(word).split()[0])
+        
+        answer = set(self.total)
+        if len(answer) == 1 and self.total[0] == username:
+            return False
+        return True
             
         
 class Comment(models.Model):

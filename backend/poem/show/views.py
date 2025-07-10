@@ -25,13 +25,18 @@ def poem(request, poem_id):
             
             comment.user = request.user
             comment.poem = poem
-
-            if comment.filters(text=comment.text):
-                comment.save()
+            
+            last_comment = poem.comment.order_by('-id')[:4]
+            
+            if last_comment.checking(request.user.username):
+                if comment.filters(text=comment.text):
+                    comment.save()
+                else:
+                    print('Обнаружены запрещённые слова! Комментарий отклонён.', last_comment)
             else:
-                print('Обнаружены запрещённые слова! Комментарий отклонён.')
-                    
+                print('Вы не можете писать', request.user.username)
             return redirect(request.META.get('HTTP_REFERER', '/'))
+        
     else:
         form = CommentForm()
     
