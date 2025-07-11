@@ -25,7 +25,12 @@ A personal poetry blog where users can register, read, comment, like, and save p
 
 ## 🖼️ Screenshots
 
-*Coming soon...*
+![Main page](image_README/index.jpg)
+![poem page](image_README/poem.jpg)
+![poem page with messages](image_README/index_messages.jpg)
+![profile page](image_README/profile.jpg)
+![sign page](image_README/sign.jpg)
+![login page](image_README/login.jpg)
 
 ---
 
@@ -46,7 +51,7 @@ Follow these steps to run the project locally:
 1. Clone the repository:
 
    `git clone https://github.com/vladkish/crud.git`  
-   `cd crud/backend/poem`
+   `cd crud/backend/`
 
 2. Create and activate a virtual environment:
 
@@ -55,7 +60,7 @@ Follow these steps to run the project locally:
    On Windows run: `venv\Scripts\activate`
 
 3. Install dependencies:
-
+   `cd crud/backend/`
    `pip install -r requirements.txt`
 
 4. Apply migrations:
