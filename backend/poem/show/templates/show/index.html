@@ -23,7 +23,7 @@
                                 <span class="date">{{ poems.date_count }}</span>
                                 <span class="category">{{ poems.category }}</span>
                             </div>
-                            <h3 class="poem-title"><a href="poem.html">{{ poems.title }}</a></h3>
+                            <h3 class="poem-title"><a href="{% url "show:poem" poems.id %}">{{ poems.title }}</a></h3>
                             <div class="poem-excerpt">
                                 <p>{{ poems.text_poem }}<br>
                                 </p>
