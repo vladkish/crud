@@ -834,3 +834,61 @@ h3 {
 .gold {
     color: var(--accent-color) !important;
 }
+
+
+.message-box {
+    position: relative;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #F9F6F2;
+    border-left: 4px solid #C18C5D;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    font-family: 'Georgia', serif;
+    color: #2E2E2E;
+    line-height: 1.6;
+    transition: all 0.3s ease;
+}
+
+.message-box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.message-box-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #3B3B3B;
+}
+
+.message-box-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #666;
+    cursor: pointer;
+    padding: 0 5px;
+    transition: color 0.2s;
+}
+
+.message-box-close:hover {
+    color: #C18C5D;
+}
+
+.message-box-content {
+    font-size: 16px;
+}
+
+/* Анимации */
+.message-box.fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 0;
+    overflow: hidden;
+}

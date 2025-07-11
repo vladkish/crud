@@ -38,6 +38,19 @@
         </div>
     </header>
 
+    <div class="message-box" id="custom-message-box">
+        <div class="message-box-header">
+            <div class="message-box-title">Важное сообщение</div>
+            <button class="message-box-close" aria-label="Закрыть">&times;</button>
+        </div>
+        <div class="message-box-content">
+            Здесь вы можете разместить любой текст. Это может быть важное уведомление, 
+            информационное сообщение или просто заметка для пользователей. 
+            Блок имеет красивый дизайн в соответствии с вашей цветовой схемой 
+            и плавную анимацию при закрытии.
+        </div>
+    </div>
+
     {% block main %}
 
     {% endblock main %}
@@ -67,5 +80,7 @@
             </div>
         </div>
     </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
