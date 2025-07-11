@@ -43,7 +43,8 @@ def poem(request, poem_id):
     context = {
         'poem': poem,
         'form': form,
-        'comments': Comment.objects.filter(poem_id=poem_id),
+        'comments': Comment.objects.filter(poem_id=poem_id).order_by('-id')[:6],
+        'count_comment' : Comment.objects.filter(poem_id=poem_id).count(),
         'saved_poems': request.user.read_poems.all()[:3],
     }
     
