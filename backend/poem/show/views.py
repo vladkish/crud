@@ -30,15 +30,17 @@ def poem(request, poem_id):
             comment.poem = poem
             
             last_comment = poem.comment.order_by('-id')[:4]
-            
+        
             if last_comment.checking(request.user.username):
                 if comment.filters(text=comment.text):
                     comment.save()
                 else:
-                    print('Обнаружены запрещённые слова! Комментарий отклонён.', last_comment)
+                    return messages.error(request, 'Вы не можете такое писать!')
             else:
-                print('Вы не можете писать', request.user.username)
+                return messages.error(request, 'Вы не можете пока что писать!')
+
             return redirect(request.META.get('HTTP_REFERER', '/'))
+
         
     else:
         form = CommentForm()
@@ -46,7 +48,7 @@ def poem(request, poem_id):
     context = {
         'poem': poem,
         'form': form,
-        'comments': Comment.objects.filter(poem_id=poem_id).order_by('-id')[:6],
+        'comments': reversed(Comment.objects.filter(poem_id=poem_id).order_by('-id')[:6]),
         'count_comment' : Comment.objects.filter(poem_id=poem_id).count(),
         'saved_poems': request.user.read_poems.all()[:3],
     }
