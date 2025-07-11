@@ -65,7 +65,7 @@
                     {% for poem in save_poems %}
                         <div class="poem-item">
                             <h3><a href="{% url "show:poem" poem.poem.id %}">{{ poem.poem.title }}</a></h3>
-                            <p class="poem-excerpt">{{ poem.poem.text_poem }}...</p>
+                            <p class="poem-excerpt">{{ poem.poem.text_poem }}</p>
                             <div class="poem-meta">
                                 <span class="author">Rita D.</span>
                                 <span class="date">{{ poem.poem.date_public.date }}</span>
