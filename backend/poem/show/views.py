@@ -50,11 +50,16 @@ def poem(request, poem_id):
         'form': form,
         'comments': reversed(Comment.objects.filter(poem_id=poem_id).order_by('-id')[:6]),
         'count_comment' : Comment.objects.filter(poem_id=poem_id).count(),
-        'saved_poems': request.user.read_poems.all()[:3],
     }
     
-    poem.reads.add(request.user)
-    request.user.read_poems.add(poem)
+    try:
+        context['saved_poems'] = request.user.read_poems.all()[:3]
+    except:
+        context
+    
+    if request.user.is_authenticated:
+        poem.reads.add(request.user)
+        request.user.read_poems.add(poem)
     return render(request, 'show/poem.html', context)
 
 # System likes.
