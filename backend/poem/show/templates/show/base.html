@@ -38,18 +38,35 @@
         </div>
     </header>
 
-    <div class="message-box" id="custom-message-box">
-        <div class="message-box-header">
-            <div class="message-box-title">Важное сообщение</div>
-            <button class="message-box-close" aria-label="Закрыть">&times;</button>
+    {% if messages or form.errors %}
+        <div class="message-box" id="custom-message-box">
+            <div class="message-box-header">
+                <div class="message-box-title">Важное сообщение</div>
+                <button class="message-box-close" aria-label="Закрыть">&times;</button>
+            </div>
+
+            {% for message in messages %}
+                <div class="alert {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {% if form.errors %}
+                <div class="alert error">
+                    <ul>
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
         </div>
-        <div class="message-box-content">
-            Здесь вы можете разместить любой текст. Это может быть важное уведомление, 
-            информационное сообщение или просто заметка для пользователей. 
-            Блок имеет красивый дизайн в соответствии с вашей цветовой схемой 
-            и плавную анимацию при закрытии.
-        </div>
-    </div>
+    {% endif %}
 
     {% block main %}
 

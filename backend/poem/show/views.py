@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Category, Poem, Comment, SavePoem
 from django.contrib.auth.decorators import login_required
 from .forms import CommentForm
+from django.contrib import messages
 
 def index(request, category_id=None):
 
@@ -21,6 +22,8 @@ def poem(request, poem_id):
         if form.is_valid():
             comment = form.save(commit=False)
             if not request.user.is_authenticated:
+                
+                messages.success(request, 'Для работы на сайте нужна Авторизация')
                 return redirect('users:login')
             
             comment.user = request.user

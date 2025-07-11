@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import LoginForm, SignForm, ProfileForm
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from show.models import SavePoem
 
@@ -15,6 +15,8 @@ def login(request):
             
             if user:
                 auth.login(request, user)
+                
+                messages.success(request, 'Успешно вошли!')
                 return redirect('index')
     else:
         form = LoginForm()    
@@ -30,12 +32,18 @@ def sign(request):
     if request.method == "POST":
         form = SignForm(data=request.POST)
         email = request.POST['email']
-        if form.is_valid() and form.email_checking(email):
-            user = form.save()
-            auth.login(request, user)
-            return redirect('index')
+        
+        if form.email_checking(email):
+            if form.is_valid():
+                user = form.save()
+                auth.login(request, user)
+                
+                messages.success(request, 'Успешно создали!')
+                return redirect('index')
+            else:
+                messages.error(request, 'Неправильные данные')
         else:
-            print(form.errors)
+            messages.error(request, 'Почта уже занята :(')
     else:
         form = SignForm()
         
@@ -66,4 +74,6 @@ def profile(request):
 @login_required
 def logout(request):
     auth.logout(request)
+    
+    messages.success(request, 'Вышли!')
     return redirect('index')
